@@ -7,18 +7,20 @@ on:
 permissions:
   contents: read
   pull-requests: read
+  secrets: read
 
 jobs:
-  notify:
+  notify-slack:
     if: github.actor == 'dependabot[bot]'
     runs-on: ubuntu-latest
 
     steps:
-      - uses: slackapi/slack-github-action@v1.24.0
+      - name: Send Slack notification
+        uses: slackapi/slack-github-action@v1.24.0
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         with:
           payload: |
             {
-              "text": "🤖 *Dependabot PR opened*\n📦 ${{ github.event.pull_request.title }}\n🔗 ${{ github.event.pull_request.html_url }}"
+              "text": "🤖 Dependabot PR opened\n${{ github.event.pull_request.title }}\n${{ github.event.pull_request.html_url }}"
             }
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
