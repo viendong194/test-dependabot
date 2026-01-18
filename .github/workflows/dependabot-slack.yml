@@ -7,7 +7,6 @@ on:
 permissions:
   contents: read
   pull-requests: read
-  secrets: read
 
 jobs:
   notify-slack:
@@ -22,5 +21,5 @@ jobs:
         with:
           payload: |
             {
-              "text": "🤖 Dependabot PR opened\n${{ github.event.pull_request.title }}\n${{ github.event.pull_request.html_url }}"
+              "text": "🤖 Dependabot PR opened\n📦 ${{ github.event.pull_request.title }}\n🔗 ${{ github.event.pull_request.html_url }}"
             }
