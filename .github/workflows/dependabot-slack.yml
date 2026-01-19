@@ -17,7 +17,8 @@ jobs:
       - name: Notify Slack
         uses: slackapi/slack-github-action@v2.0.0
         with:
-          webhook-url: ${{ secrets.SLACK_WEBHOOK_URL }}
+          slack-token: ${{ secrets.SLACK_BOT_TOKEN }} 
+          channel-id: C0A9D2BD5E2
           payload: |
             {
               "text": "🤖 *Dependabot PR opened*\n📦 ${{ github.event.pull_request.title }}\n🔗 ${{ github.event.pull_request.html_url }}"
