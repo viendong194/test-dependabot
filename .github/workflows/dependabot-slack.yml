@@ -12,12 +12,14 @@ jobs:
   notify-slack:
     if: github.actor == 'dependabot[bot]'
     runs-on: ubuntu-latest
-
     steps:
       - name: Notify Slack
         uses: slackapi/slack-github-action@v2.0.0
         with:
+          # PHẢI là 'token', không phải 'slack-token'
           token: ${{ secrets.SLACK_BOT_TOKEN }}
+          # v2.0.0 cần xác định rõ method khi dùng Bot Token
+          method: chat.postMessage
           payload: |
             {
               "channel": "C0A9D2BD5E2",
