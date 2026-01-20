@@ -23,5 +23,63 @@ jobs:
           payload: |
             {
               "channel": "C0A9D2BD5E2",
-              "text": "🤖 *Dependabot PR opened*\n📦 ${{ github.event.pull_request.title }}\n🔗 ${{ github.event.pull_request.html_url }}"
+              "attachments": [
+                {
+                  "color": "#2eb886",
+                  "blocks": [
+                    {
+                      "type": "section",
+                      "text": {
+                        "type": "mrkdwn",
+                        "text": "📦 *New Dependabot Update*"
+                      }
+                    },
+                    {
+                      "type": "section",
+                      "fields": [
+                        {
+                          "type": "mrkdwn",
+                          "text": "*Repository:*\n${{ github.repository }}"
+                        },
+                        {
+                          "type": "mrkdwn",
+                          "text": "*Target Branch:*\n`${{ github.base_ref }}`"
+                        },
+                        {
+                          "type": "mrkdwn",
+                          "text": "*Package:*\n${{ github.event.pull_request.title }}"
+                        },
+                        {
+                          "type": "mrkdwn",
+                          "text": "*Status:*\nPending Review"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "actions",
+                      "elements": [
+                        {
+                          "type": "button",
+                          "text": {
+                            "type": "plain_text",
+                            "text": "🔍 Review PR",
+                            "emoji": true
+                          },
+                          "url": "${{ github.event.pull_request.html_url }}",
+                          "style": "primary"
+                        },
+                        {
+                          "type": "button",
+                          "text": {
+                            "type": "plain_text",
+                            "text": "🛠 Github Actions",
+                            "emoji": true
+                          },
+                          "url": "${{ github.server_url }}/${{ github.repository }}/actions"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
             }
